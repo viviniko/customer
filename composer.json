@@ -1,0 +1,28 @@
+{
+    "name": "viviniko/customer",
+    "description": "VIVINIKO Customer Service Provider",
+	"keywords": ["viviniko", "customer", "laravel"],
+	"homepage": "http://viviniko.com",
+	"license": "MIT",
+	"authors": [
+        {
+            "name": "viviniko",
+            "email": "viviniko.shop@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "illuminate/auth": "~5.0",
+        "illuminate/notifications": "~5.0",
+        "laravel/socialite": "^3.0",
+        "viviniko/repository": "dev-master",
+        "viviniko/support": "dev-master"
+    },
+	"autoload": {
+        "psr-0": {
+            "Viviniko\\Customer": "src"
+        }
+    },
+    "minimum-stability": "dev",
+	"prefer-stable": true
+}

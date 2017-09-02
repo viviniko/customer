@@ -1,0 +1,105 @@
+<?php
+
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateCustomerTable extends Migration
+{
+    /**
+     * @var string
+     */
+    protected $customersTable;
+
+    /**
+     * @var string
+     */
+    protected $customerSocialNetworksTable;
+
+    /**
+     * @var string
+     */
+    protected $customerSocialLoginsTable;
+
+    /**
+     * @var string
+     */
+    protected $passwordResetsTable;
+
+    /**
+     * CreateCustomerTable constructor.
+     */
+    public function __construct()
+    {
+        $this->customersTable = Config::get('customer.customers_table');
+        $this->passwordResetsTable = Config::get('customer.password_resets_table');
+        $this->customerSocialNetworksTable = Config::get('customer.social_networks_table');
+        $this->customerSocialLoginsTable = Config::get('customer.social_logins_table');
+    }
+
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        // Create table for storing customer
+        Schema::create($this->customersTable, function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('email', 128)->unique();
+            $table->string('password');
+            $table->string('firstname', 32)->nullable();
+            $table->string('lastname', 32)->nullable();
+            $table->string('phone', 11)->nullable();
+            $table->boolean('is_active')->default(true);
+            $table->string('reg_ip', 45)->nullable();
+            $table->timestamp('log_date')->nullable();
+            $table->string('log_ip', 45)->nullable();
+            $table->unsignedInteger('log_num')->default(0);
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
+        // Create table for storing customer password resets
+        Schema::create($this->passwordResetsTable, function (Blueprint $table) {
+            $table->string('email')->index();
+            $table->string('token')->index();
+            $table->timestamp('created_at')->nullable();
+        });
+
+        Schema::create($this->customerSocialNetworksTable, function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('customer_id');
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('google_plus')->nullable();
+            $table->string('linked_in')->nullable();
+            $table->string('dribbble')->nullable();
+            $table->string('skype')->nullable();
+        });
+
+        Schema::create($this->customerSocialLoginsTable, function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('customer_id');
+            $table->string('provider', 50);
+            $table->string('provider_id');
+            $table->string('avatar');
+            $table->timestamp('created_at');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists($this->customersTable);
+        Schema::dropIfExists($this->passwordResetsTable);
+        Schema::dropIfExists($this->customerSocialNetworksTable);
+        Schema::dropIfExists($this->customerSocialLoginsTable);
+    }
+}
