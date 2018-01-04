@@ -1,20 +1,17 @@
 <?php
 
-namespace Viviniko\Customer\Services\Customer;
+namespace Viviniko\Customer\Repositories\Customer;
 
-use Carbon\Carbon;
-use Viviniko\Customer\Contracts\CustomerService as CustomerServiceInterface;
-use Viviniko\Customer\Contracts\Provider;
-use Viviniko\Repository\SimpleRepository;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Laravel\Socialite\Contracts\User as SocialUser;
+use Viviniko\Repository\SimpleRepository;
 
-class EloquentCustomer extends SimpleRepository implements CustomerServiceInterface
+class EloquentCustomer extends SimpleRepository implements CustomerRepository
 {
-    use ValidatesCustomerData;
-
+    /**
+     * @var string
+     */
     protected $modelConfigKey = 'customer.customer';
 
     /**
@@ -26,29 +23,7 @@ class EloquentCustomer extends SimpleRepository implements CustomerServiceInterf
     }
 
     /**
-     * Silence register.
-     *
-     * @param $data
-     * @return mixed
-     */
-    public function silenceRegister($data)
-    {
-        if (!isset($data['password'])) {
-            $data['password'] = Str::random(8);
-        }
-        if (!isset($data['password_confirmation'])) {
-            $data['password_confirmation'] = $data['password'];
-        }
-
-        return $this->create($data);
-    }
-
-    /**
-     * Find user registered via social network.
-     *
-     * @param $provider Provider used for authentication.
-     * @param $providerId Provider's unique identifier for authenticated user.
-     * @return mixed
+     * {@inheritdoc}
      */
     public function findBySocialId($provider, $providerId)
     {
@@ -63,13 +38,7 @@ class EloquentCustomer extends SimpleRepository implements CustomerServiceInterf
     }
 
     /**
-     * Associate account details returned from social network
-     * to user with provided customer id.
-     *
-     * @param $id
-     * @param $provider
-     * @param SocialUser $user
-     * @return mixed
+     * {@inheritdoc}
      */
     public function associateSocialAccount($id, $provider, SocialUser $user)
     {
@@ -83,10 +52,7 @@ class EloquentCustomer extends SimpleRepository implements CustomerServiceInterf
     }
 
     /**
-     * Update customer social networks.
-     * @param $id
-     * @param array $data
-     * @return mixed
+     * {@inheritdoc}
      */
     public function updateSocialNetworks($id, array $data)
     {

@@ -46,6 +46,8 @@ class CustomerServiceProvider extends BaseServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/customer.php', 'customer');
 
+        $this->registerRepositories();
+
         $this->registerCustomerService();
 
         $this->registerCommands();
@@ -61,6 +63,14 @@ class CustomerServiceProvider extends BaseServiceProvider
         $this->app->singleton('command.customer.table', function ($app) {
             return new CustomerTableCommand($app['files'], $app['composer']);
         });
+    }
+
+    protected function registerRepositories()
+    {
+        $this->app->singleton(
+            \Viviniko\Customer\Repositories\Customer\CustomerRepository::class,
+            \Viviniko\Customer\Repositories\Customer\EloquentCustomer::class
+        );
     }
 
     /**
@@ -84,6 +94,7 @@ class CustomerServiceProvider extends BaseServiceProvider
     public function provides()
     {
         return [
+            \Viviniko\Customer\Repositories\Customer\CustomerRepository::class,
             \Viviniko\Customer\Contracts\CustomerService::class
         ];
     }
