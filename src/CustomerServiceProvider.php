@@ -82,7 +82,7 @@ class CustomerServiceProvider extends BaseServiceProvider
     {
         $this->app->singleton(
             \Viviniko\Customer\Contracts\CustomerService::class,
-            \Viviniko\Customer\Services\Customer\EloquentCustomer::class
+            \Viviniko\Customer\Services\Customer\CustomerServiceImpl::class
         );
     }
 
