@@ -7,6 +7,17 @@ use Laravel\Socialite\Contracts\User as SocialUser;
 interface CustomerRepository
 {
     /**
+     * Paginate the given query into a simple paginator.
+     *
+     * @param null $perPage
+     * @param string $searchName
+     * @param null $search
+     * @param null $order
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function paginate($perPage = null, $searchName = 'search', $search = null, $order = null);
+
+    /**
      * Find customer by its id.
      *
      * @param $id
