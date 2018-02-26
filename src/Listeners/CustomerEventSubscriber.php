@@ -3,34 +3,34 @@
 namespace Viviniko\Customer\Listeners;
 
 use Carbon\Carbon;
-use Viviniko\Customer\Contracts\CustomerService;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
+use Viviniko\Customer\Repositories\Customer\CustomerRepository;
 
 class CustomerEventSubscriber
 {
 	/**
-	 * @var \Viviniko\Customer\Contracts\CustomerService
+	 * @var \Viviniko\Customer\Repositories\Customer\CustomerRepository
 	 */
-	private $customerService;
+	private $customers;
 
-	public function __construct(CustomerService $customerService)
+	public function __construct(CustomerRepository $customers)
     {
-		$this->customerService = $customerService;
+		$this->customers = $customers;
 	}
 
     public function onRegistered(Registered $event)
     {
-        $this->customerService->update($event->user->id, [
+        $this->customers->update($event->user->id, [
             'reg_ip' => Request::ip(),
         ]);
     }
 
 	public function onLogin(Login $event)
     {
-	    $this->customerService->update($event->user->id, [
+	    $this->customers->update($event->user->id, [
             'log_num' => DB::raw('log_num + 1'),
             'log_ip' => Request::ip(),
             'log_date' => Carbon::now(),
