@@ -67,6 +67,22 @@ class CustomerServiceImpl implements CustomerService
     /**
      * {@inheritdoc}
      */
+    public function create(array $data)
+    {
+        return $this->customerRepository->create($data);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function updatePassword($id, $password)
+    {
+        return $this->customerRepository->update($id, compact('password'));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function silenceRegister($data)
     {
         if (!isset($data['password'])) {

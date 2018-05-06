@@ -43,6 +43,23 @@ interface CustomerService
     public function updateSocialNetworks($id, array $data);
 
     /**
+     * create customer.
+     *
+     * @param array $data
+     * @return mixed
+     */
+    public function create(array $data);
+
+    /**
+     * update password.
+     *
+     * @param $id
+     * @param string $password
+     * @return mixed
+     */
+    public function updatePassword($id, $password);
+
+    /**
      * Silence register.
      *
      * @param $data
