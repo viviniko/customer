@@ -81,8 +81,8 @@ class CustomerServiceProvider extends BaseServiceProvider
     protected function registerCustomerService()
     {
         $this->app->singleton(
-            \Viviniko\Customer\Contracts\CustomerService::class,
-            \Viviniko\Customer\Services\Customer\CustomerServiceImpl::class
+            \Viviniko\Customer\Services\CustomerService::class,
+            \Viviniko\Customer\Services\CustomerServiceImpl::class
         );
     }
 
@@ -94,8 +94,7 @@ class CustomerServiceProvider extends BaseServiceProvider
     public function provides()
     {
         return [
-            \Viviniko\Customer\Repositories\Customer\CustomerRepository::class,
-            \Viviniko\Customer\Contracts\CustomerService::class
+            \Viviniko\Customer\Services\CustomerService::class,
         ];
     }
 }

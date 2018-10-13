@@ -5,14 +5,14 @@ namespace Viviniko\Customer\Repositories\Customer;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Contracts\User as SocialUser;
-use Viviniko\Repository\SimpleRepository;
+use Viviniko\Repository\EloquentRepository;
 
-class EloquentCustomer extends SimpleRepository implements CustomerRepository
+class EloquentCustomer extends EloquentRepository implements CustomerRepository
 {
-    /**
-     * @var string
-     */
-    protected $modelConfigKey = 'customer.customer';
+    public function __construct()
+    {
+        parent::__construct(Config::get('customer.customer'));
+    }
 
     /**
      * {@inheritdoc}

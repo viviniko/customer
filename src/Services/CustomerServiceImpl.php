@@ -1,15 +1,16 @@
 <?php
 
-namespace Viviniko\Customer\Services\Customer;
+namespace Viviniko\Customer\Services;
 
 use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Contracts\User as SocialUser;
-use Viviniko\Customer\Contracts\CustomerService;
 use Viviniko\Customer\Events\SilenceRegistered;
 use Viviniko\Customer\Repositories\Customer\CustomerRepository;
+use Viviniko\Support\AbstractRequestRepositoryService;
 
-class CustomerServiceImpl implements CustomerService
+class CustomerServiceImpl extends AbstractRequestRepositoryService implements CustomerService
 {
     /**
      * @var \Viviniko\Customer\Repositories\Customer\CustomerRepository
@@ -25,9 +26,11 @@ class CustomerServiceImpl implements CustomerService
      * CustomerServiceImpl constructor.
      * @param \Viviniko\Customer\Repositories\Customer\CustomerRepository $customerRepository
      * @param \Illuminate\Contracts\Events\Dispatcher $events
+     * @param \Illuminate\Http\Request
      */
-    public function __construct(CustomerRepository $customerRepository, Dispatcher $events)
+    public function __construct(CustomerRepository $customerRepository, Dispatcher $events, Request $request)
     {
+        parent::__construct($request);
         $this->customerRepository = $customerRepository;
         $this->events = $events;
     }
@@ -99,5 +102,13 @@ class CustomerServiceImpl implements CustomerService
         }
 
         return $customer;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRepository()
+    {
+        return $this->customerRepository;
     }
 }
