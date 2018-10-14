@@ -86,9 +86,13 @@ class CustomerServiceImpl extends AbstractRequestRepositoryService implements Cu
     /**
      * {@inheritdoc}
      */
-    public function updatePassword($id, $password)
+    public function updateCustomer($id, $data)
     {
-        return $this->customerRepository->update($id, compact('password'));
+        if (empty($data['password'])) {
+            unset($data['password']);
+        }
+
+        return $this->customerRepository->update($id, $data);
     }
 
     /**

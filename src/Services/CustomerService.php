@@ -69,13 +69,11 @@ interface CustomerService
     public function createCustomer(array $data);
 
     /**
-     * update password.
-     *
      * @param $id
-     * @param string $password
+     * @param $data
      * @return mixed
      */
-    public function updatePassword($id, $password);
+    public function updateCustomer($id, $data);
 
     /**
      * Silence register.
