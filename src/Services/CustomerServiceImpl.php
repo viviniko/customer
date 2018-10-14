@@ -38,7 +38,15 @@ class CustomerServiceImpl extends AbstractRequestRepositoryService implements Cu
     /**
      * {@inheritdoc}
      */
-    public function findByEmail($email)
+    public function getCustomer($id)
+    {
+        return $this->customerRepository->find($id);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCustomerByEmail($email)
     {
         return $this->customerRepository->findByEmail($email);
     }
@@ -46,7 +54,7 @@ class CustomerServiceImpl extends AbstractRequestRepositoryService implements Cu
     /**
      * {@inheritdoc}
      */
-    public function findBySocialId($provider, $providerId)
+    public function getCustomerBySocialId($provider, $providerId)
     {
         return $this->customerRepository->findBySocialId($provider, $providerId);
     }
@@ -70,7 +78,7 @@ class CustomerServiceImpl extends AbstractRequestRepositoryService implements Cu
     /**
      * {@inheritdoc}
      */
-    public function create(array $data)
+    public function createCustomer(array $data)
     {
         return $this->customerRepository->create($data);
     }

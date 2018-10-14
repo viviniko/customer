@@ -17,12 +17,20 @@ interface CustomerService
     public function paginate($pageSize, $wheres = [], $orders = []);
 
     /**
+     * Get customer
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function getCustomer($id);
+
+    /**
      * Get customer by email.
      *
      * @param $email
      * @return mixed
      */
-    public function findByEmail($email);
+    public function getCustomerByEmail($email);
 
     /**
      * Find user registered via social network.
@@ -31,7 +39,7 @@ interface CustomerService
      * @param $providerId Provider's unique identifier for authenticated user.
      * @return mixed
      */
-    public function findBySocialId($provider, $providerId);
+    public function getCustomerBySocialId($provider, $providerId);
 
     /**
      * Associate account details returned from social network
@@ -58,7 +66,7 @@ interface CustomerService
      * @param array $data
      * @return mixed
      */
-    public function create(array $data);
+    public function createCustomer(array $data);
 
     /**
      * update password.
