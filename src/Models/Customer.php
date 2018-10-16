@@ -19,7 +19,7 @@ class Customer extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'password', 'phone', 'is_active', 'reg_ip', 'log_num', 'log_date', 'log_ip'
+        'first_name', 'last_name', 'email', 'password', 'phone', 'is_active', 'reg_ip', 'log_num', 'log_date', 'log_ip'
     ];
 
     protected $casts = [
@@ -58,7 +58,7 @@ class Customer extends Authenticatable
 
     public function getNameAttribute()
     {
-        $name = "{$this->firstname} {$this->lastname}";
+        $name = "{$this->first_name} {$this->last_name}";
 
         return trim($name) ? $name : ucfirst(explode('@', $this->email, 2)[0]);
     }

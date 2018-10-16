@@ -2,7 +2,7 @@
 
 namespace Viviniko\Customer\Notifications;
 
-use Viviniko\Mail\Contracts\MailService;
+use Viviniko\Mail\Services\MailService;
 use Illuminate\Notifications\Notification;
 
 class Registered extends Notification {
@@ -24,7 +24,7 @@ class Registered extends Notification {
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable) {
-        return app(MailService::class)->make('	user.register', array_merge($notifiable->toArray(), [
+        return app(MailService::class)->make('user.register', array_merge($notifiable->toArray(), [
             'login_url' => route('login'),
         ]))->to($notifiable->email);
     }

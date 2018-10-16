@@ -50,8 +50,8 @@ class CreateCustomerTable extends Migration
             $table->increments('id');
             $table->string('email', 128)->unique();
             $table->string('password');
-            $table->string('firstname', 32)->nullable();
-            $table->string('lastname', 32)->nullable();
+            $table->string('first_name', 32)->nullable();
+            $table->string('last_name', 32)->nullable();
             $table->string('phone', 11)->nullable();
             $table->boolean('is_active')->default(true);
             $table->string('reg_ip', 45)->nullable();

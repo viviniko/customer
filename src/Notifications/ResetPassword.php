@@ -2,7 +2,7 @@
 
 namespace Viviniko\Customer\Notifications;
 
-use Viviniko\Mail\Contracts\MailService;
+use Viviniko\Mail\Services\MailService;
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 
 class ResetPassword extends ResetPasswordNotification
