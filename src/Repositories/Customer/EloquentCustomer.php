@@ -19,7 +19,7 @@ class EloquentCustomer extends EloquentRepository implements CustomerRepository
      */
     public function findByEmail($email)
     {
-        return $this->findBy('email', $email)->first();
+        return $this->findBy('email', $email);
     }
 
     /**
