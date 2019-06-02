@@ -17,14 +17,6 @@ class EloquentCustomer extends EloquentRepository implements CustomerRepository
     /**
      * {@inheritdoc}
      */
-    public function findByEmail($email)
-    {
-        return $this->findBy('email', $email);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function findBySocialId($provider, $providerId)
     {
         $customerTable = Config::get('customer.customers_table');
