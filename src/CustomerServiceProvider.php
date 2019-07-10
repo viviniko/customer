@@ -51,8 +51,6 @@ class CustomerServiceProvider extends BaseServiceProvider
 
         $this->registerRepositories();
 
-        $this->registerCustomerService();
-
         $this->registerCommands();
     }
 
@@ -77,27 +75,12 @@ class CustomerServiceProvider extends BaseServiceProvider
     }
 
     /**
-     * Register the user service provider.
-     *
-     * @return void
-     */
-    protected function registerCustomerService()
-    {
-        $this->app->singleton(
-            \Viviniko\Customer\Services\CustomerService::class,
-            \Viviniko\Customer\Services\CustomerServiceImpl::class
-        );
-    }
-
-    /**
      * Get the services provided by the provider.
      *
      * @return array
      */
     public function provides()
     {
-        return [
-            \Viviniko\Customer\Services\CustomerService::class,
-        ];
+        return [];
     }
 }
