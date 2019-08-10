@@ -3,6 +3,7 @@
 namespace Viviniko\Customer;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Viviniko\Customer\Console\Commands\CustomerTableCommand;
 
@@ -35,6 +36,8 @@ class CustomerServiceProvider extends BaseServiceProvider
         Relation::morphMap([
             'customer.customer' => $config->get('customer.customer'),
         ]);
+
+        Event::subscribe(\Viviniko\Customer\Listeners\CustomerEventSubscriber::class);
     }
 
     /**
@@ -78,7 +81,6 @@ class CustomerServiceProvider extends BaseServiceProvider
      */
     public function provides()
     {
-        return [
-        ];
+        return [];
     }
 }
