@@ -15,8 +15,7 @@
         "illuminate/auth": "^6.0",
         "illuminate/notifications": "^6.0",
         "viviniko/repository": "dev-master",
-        "viviniko/support": "dev-master",
-        "laravel/socialite": "^4.2"
+        "viviniko/support": "dev-master"
     },
     "autoload": {
         "psr-0": {
