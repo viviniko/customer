@@ -14,9 +14,9 @@
         "php": ">=7.0",
         "illuminate/auth": "^6.0",
         "illuminate/notifications": "^6.0",
-        "laravel/socialite": "^3.0",
         "viviniko/repository": "dev-master",
-        "viviniko/support": "dev-master"
+        "viviniko/support": "dev-master",
+        "laravel/socialite": "^4.2"
     },
     "autoload": {
         "psr-0": {
