@@ -8,10 +8,11 @@ use Viviniko\Customer\Notifications\ResetPassword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Config;
+use Viviniko\Favorite\Favoritor;
 
 class Customer extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Favoritor;
 
     /**
      * The attributes that are mass assignable.
